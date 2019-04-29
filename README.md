@@ -1,0 +1,2 @@
+# A-Star-Algorithm-for-2d-Maze-C-11
+This repository contains simple C++ 11 implementation of A-Star algorithm for a 2d maze. The maze is hard-coded in the algorithm. The algorithm asks for user input for start node and finds a path to pre-defined goal node which is also hard-coded in the algorithm. Only C++ 11 native data structures are used in this project and there is no usage of other libraries.
