@@ -11,7 +11,6 @@
 #include <map>
 
 struct ListInfo {
-    int node_no = -10, parent_no = -10;
     double cost_g = 0;
     double cost_h = -10;
     double total_cost = -10;
@@ -19,10 +18,15 @@ struct ListInfo {
     std::pair<int, int> parent{std::make_pair(-100, -100)};
 };
 
-class Maze {
-public:
-    Maze() : grid_{{"S#####", ".....#", "#.####", "#.####", "...##G", "##...#"}},
-             start_{std::make_pair(0, 0)}, goal_{std::make_pair(4, 5)} {}
+class Maze {       // First
+public:            //012345  // Second
+    Maze() : grid_{{"S#####",//0
+                    ".....#",//1
+                    "#.####",//2
+                    "#.#G.#",//3
+                    "...#.#",//4
+                    "##...#"}},//5
+             start_{std::make_pair(0, 0)}, goal_{std::make_pair(3, 3)} {}
 
     ~Maze() = default;
 
@@ -41,10 +45,10 @@ public:
     std::pair<int, int> South(std::pair<int, int> node) const;
 
     const int TakeDecision1(const std::pair<int, int> &new_node, const double &cost_g, ListInfo &info,
-                            const std::pair<int, int> &parent_node, const int &parent_no, int &node_no);
+                            const std::pair<int, int> &parent_node);
 
     const int TakeDecision2(const std::pair<int, int> &new_node, const double &cost_g, ListInfo &info,
-                            const std::pair<int, int> &parent_node, const int &parent_no, int &node_no);
+                            const std::pair<int, int> &parent_node);
 
     int Action();
 
@@ -60,7 +64,7 @@ public:
 private:
     const std::array<std::string, 6> grid_;
     const std::pair<int, int> start_, goal_;
-    std::map<double, ListInfo> priority_list_;
+    std::multimap<double, ListInfo> priority_list_;
     std::map<std::pair<int, int>, ListInfo> open_list_, closed_list_;
 };
 
