@@ -3,7 +3,6 @@
 
 int main() {
     Maze game;
-    game.Scan();
     game.Action();
     game.PlotTrajectory();
 

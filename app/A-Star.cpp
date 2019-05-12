@@ -7,58 +7,10 @@
 #include <cmath>
 #include "../include/A-Star.h"
 
-void Maze::Spawn(std::array<std::string, 6> board) const {
+void Maze::Spawn(std::array<std::string, 31> board) const {
     for (auto &item : board) {
         std::cout << item << std::endl;
     }
-}
-
-const std::pair<int, int> Maze::Scan() const {
-    std::cout << "Do you know where is the location of node 'S' ?\n"
-                 "Please type 'Y' for Yes and 'N' for No below :\n"
-              << std::endl;
-    char input = 'A';
-    std::cin >> input;
-    switch (input) {
-        case 'Y':
-        case 'y': {
-            int z1, z2, temp;
-            z1 = -1;
-            z2 = -1;
-            std::cout << "Please enter the x - coordinate and then the"
-                         " y - coordinate for 'S' below" << std::endl;
-            while (std::cin >> temp) {
-                if (std::cin.fail() || temp < 0 || temp >= grid_.size()) {
-                    std::cout << "Please enter valid co-ordinates within"
-                                 " the scope of the maze" << std::endl;
-                    std::cin.clear();
-                    std::cin.ignore();
-                } else if (temp >= 0 && temp < grid_.size()) {
-                    if (z1 == -1) z1 = temp;
-                    else if (z2 == -1) z2 = temp;
-                } else break;
-                if (z1 != -1 && z2 != -1 && grid_[z2][z1] != 'S') {
-                    std::cout << "'S' was not found in that location" << std::endl;
-                    z1 = -1;
-                    z2 = -1;
-                }
-                if (temp != -1 && z1 != -1 && z2 != -1 && grid_[z2][z1] == 'S')
-                    break;
-            }
-            return std::make_pair(z2, z1);
-        }
-        default: {
-            for (int i = 0; i <= 6; i++) {
-                for (std::string::size_type j = 0; j < grid_[i].size(); ++j) {
-                    if (grid_[i][j] == 'S' || grid_[i][j] == 's') {
-                        return std::make_pair(i, j);
-                    }
-                }
-            }
-            break;
-        }
-    }
-    return std::make_pair(-1, -1);
 }
 
 std::pair<int, int> Maze::North(const std::pair<int, int> node) const {
@@ -88,7 +40,7 @@ bool Maze::IsNotObstacle(std::pair<int, int> node) const {
 }
 
 bool Maze::IsWithinRegion(std::pair<int, int> node) const {
-    if (node.first >= 0 && node.first <= 5 && node.second >= 0 && node.second <= 5) return true;
+    if (node.first >= 0 && node.first <= 45 && node.second >= 0 && node.second <= 30) return true;
     else return false;
 }
 
